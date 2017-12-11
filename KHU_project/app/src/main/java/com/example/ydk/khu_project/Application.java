@@ -30,6 +30,7 @@ public class Application extends AppCompatActivity implements View.OnClickListen
     Button btn_add;
     Button btn_logout;
 
+    String TAG = "Application";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
