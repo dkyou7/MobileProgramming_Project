@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ydk.khu_project.Sign_up">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Sign Up"
+        android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/edit_sign_up_id"
+            android:hint="email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:ems="10"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:id="@+id/edit_sign_up_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:ems="10"
+            android:hint="passwordconfirm"
+            android:inputType="textPassword"
+            android:id="@+id/edit_sign_up_pw_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/edit_sign_up_name"
+            android:hint="username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_sign_up_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="submit" />
+</LinearLayout>
