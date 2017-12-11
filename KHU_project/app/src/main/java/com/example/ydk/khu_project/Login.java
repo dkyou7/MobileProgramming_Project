@@ -46,9 +46,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
     public  void onClick(View v){
         switch (v.getId()){
+            //회원가입 버튼을 누를 시 정보값을 받아오
             case R.id.btn_sign_up:
-                Intent intent = new Intent(this, Sign_up.class);
-                startActivity(intent);
+                Intent intent = new Intent(this,Sign_up.class);
+                startActivityForResult(intent,1000);
                 break;
             case R.id.btn_login:
 //                int i;
@@ -70,6 +71,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 startActivity(intent_to_application);
         }
 
+
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1000 && resultCode == RESULT_OK){
+            Toast.makeText(getApplicationContext(),"회원 가입 완료",Toast.LENGTH_SHORT).show();
+            et_id.setText(data.getStringExtra("email"));
+            et_pw.setText(data.getStringExtra("pw"));
+        }
+    }
 }

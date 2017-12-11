@@ -32,16 +32,15 @@ public class Sign_up extends AppCompatActivity implements  View.OnClickListener{
         return edit_sign_up_name.getText().toString();
     }
 
-    private String sId, sPw, sPwConfirm, sName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        btn_sign_up_submit=(Button)findViewById(R.id.btn_sign_up_submit);
-        edit_sign_up_id = (EditText)findViewById(R.id.edit_sign_up_id);
-        edit_sign_up_pw = (EditText)findViewById(R.id.edit_sign_up_pw);
-        edit_sign_up_name = (EditText)findViewById(R.id.edit_sign_up_name);
-        edit_sign_up_pw_confirm = (EditText)findViewById(R.id.edit_sign_up_pw_confirm);
+        btn_sign_up_submit = (Button) findViewById(R.id.btn_sign_up_submit);
+        edit_sign_up_id = (EditText) findViewById(R.id.edit_sign_up_id);
+        edit_sign_up_pw = (EditText) findViewById(R.id.edit_sign_up_pw);
+        edit_sign_up_name = (EditText) findViewById(R.id.edit_sign_up_name);
+        edit_sign_up_pw_confirm = (EditText) findViewById(R.id.edit_sign_up_pw_confirm);
         edit_sign_up_pw_confirm.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -52,11 +51,10 @@ public class Sign_up extends AppCompatActivity implements  View.OnClickListener{
                 String password = edit_sign_up_pw.getText().toString();
                 String confirm = edit_sign_up_pw_confirm.getText().toString();
 
-                if(password.equals(confirm)){
+                if (password.equals(confirm)) {
                     edit_sign_up_pw.setBackgroundColor(Color.GREEN);
                     edit_sign_up_pw_confirm.setBackgroundColor(Color.GREEN);
-                }
-                else {
+                } else {
                     edit_sign_up_pw.setBackgroundColor(Color.RED);
                     edit_sign_up_pw_confirm.setBackgroundColor(Color.RED);
                 }
@@ -66,33 +64,31 @@ public class Sign_up extends AppCompatActivity implements  View.OnClickListener{
             public void afterTextChanged(Editable s) {
             }
         });
+
         btn_sign_up_submit.setOnClickListener(this);
-
-        sId = edit_sign_up_id.getText().toString();
-        sPw = edit_sign_up_pw.getText().toString();
-        sPwConfirm = edit_sign_up_pw_confirm.getText().toString();
-        sName = edit_sign_up_name.getText().toString();
-
-
-
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_sign_up_submit:
-                if(getsPw().equals(getsPwConfirm())){
-                    Intent intent = new Intent(this,Login.class);
-                    intent.putExtra("ID",getsId());
-                    intent.putExtra("PW",getsPw());
-                    intent.putExtra("PW_CONFIRM",getsPwConfirm());
-                    intent.putExtra("NAME",getsName());
-                    startActivity(intent);
-                    break;
+                if(edit_sign_up_id.getText().toString().length() == 0 || edit_sign_up_name.getText().toString().length() ==0){
+                    Toast.makeText(Sign_up.this,"이메일 입력해주세요!", Toast.LENGTH_SHORT).show();
+                    edit_sign_up_id.requestFocus();
+                    return;
                 }
-                else {
-                    Toast.makeText(getApplicationContext(),"비밀번보 확인이 다릅니다",Toast.LENGTH_LONG).show();
+                else if(!edit_sign_up_pw.getText().toString().equals(edit_sign_up_pw_confirm.getText().toString())){
+                    Toast.makeText(this,"비밀번호가 일치하지 않습니다!", Toast.LENGTH_SHORT).show();
+                    edit_sign_up_pw_confirm.setText("");
+                    edit_sign_up_pw.setText("");
+                    edit_sign_up_pw.requestFocus();
+                    return;
                 }
+                Intent result = new Intent();
+                result.putExtra("email",edit_sign_up_id.getText().toString());
+                result.putExtra("pw",edit_sign_up_pw.getText().toString());
+                setResult(RESULT_OK,result);
+                finish();
                 break;
         }
     }

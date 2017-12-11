@@ -65,9 +65,10 @@ public class Application extends AppCompatActivity implements View.OnClickListen
 //                intent.putExtra("Name", UserName);
 //                startActivity(intent);
                 Intent intent_to_meeting_add = new Intent(Application.this  , MeetingAdd.class);
-                startActivity(intent_to_meeting_add);
-
+                startActivityForResult(intent_to_meeting_add,1010);
                 break;
+
+            //로그아웃 시 알림 창 띄워주기
             case R.id.btn_logout:
                 //finish();
                 AlertDialog.Builder dialog = new AlertDialog.Builder(Application.this);
@@ -80,10 +81,10 @@ public class Application extends AppCompatActivity implements View.OnClickListen
                                 finish();
                             }
                         })
-                        .setNeutralButton("취소", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(),"취소 버튼 클릭",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"아니오 버튼 클릭",Toast.LENGTH_SHORT).show();
                             }
                         });
                 dialog.create();
@@ -92,4 +93,12 @@ public class Application extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1010 && resultCode == RESULT_OK){
+        txt_study1.setText(data.getStringExtra("theme"));
+        txt_study2.setText(data.getStringExtra("when"));
+        }
+    }
 }
